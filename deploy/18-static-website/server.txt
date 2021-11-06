@@ -1,0 +1,95 @@
+sudo sed -i -re 's/([a-z]{2}\.)?archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+----------------------------------------------------------
+https://github.com/nodesource/distributions
+----------------------------------------------------------
+server {
+	
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html;
+
+	location / {
+		proxy_pass "http://127.0.0.1:3000";
+        	proxy_http_version 1.1;
+        	proxy_set_header Upgrade $http_upgrade;
+        	proxy_set_header Connection 'upgrade';
+        	proxy_set_header Host $host;
+        	proxy_cache_bypass $http_upgrade;
+	}
+
+}
+-----------------------------------------------------
+db.createUser({user:"neonlearnir",pwd:"neonlearnir",roles:[ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]})
+------------------------------------------------------------
+mongodb://neonlearnir:neonlearnir@45.149.79.205:27017
+------------------------------------------------------------
+in /etc/bind/named.conf.local
+zone "dartcompany.ir" {
+        type master;
+        file "/etc/bind/for.dartcompany.ir";
+        allow-transfer { 45.149.79.205; };
+        also-notify { 45.149.79.205; };
+ };
+--------------------------------------------
+in /etc/bind/for.dartcompany.ir
+$TTL 86400
+@   IN  SOA     ns1.dartcompany.ir. root.dartcompany.ir. (
+        2011071001  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+)
+@       IN  NS          ns1.dartcompany.ir.
+@       IN  NS          ns2.dartcompany.ir.
+www     IN  A           45.149.79.205
+@       IN  A           45.149.79.205
+@       IN  A           45.149.79.205
+@       IN  A           45.149.79.205
+ns1     IN  A           45.149.79.205
+ns2     IN  A           45.149.79.205
+client  IN  A           45.149.79.205
+-------------------------------------
+server{
+        listen 45.149.79.205:80;
+        return 404;
+}
+
+server {
+        #listen 80 default_server;
+        listen dartcompany.ir:80;
+
+
+        server_name www.dartcompany.ir dartcompany.ir;
+
+
+        root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+
+
+        location / {
+                proxy_pass "http://127.0.0.1:2000";
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        }
+
+}
+--------------------------------------------------
+server {
+        #listen 80 default_server;
+        listen dartcompany.ir:80;
+        server_name dartcompany.ir dartcompany.ir;
+                                                                                                                                                                                                              root /var/www/sites/dartcompany.ir;
+        index index.html;
+
+}

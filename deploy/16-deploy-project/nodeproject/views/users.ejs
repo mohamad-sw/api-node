@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%- include('components/validation-error') -%>
+     <% if(message){ %>
+    <h4><%= message %></h4>
+    <% } %>
+    <div>
+      <form action="/user" method="POST">
+        <input type="text" placeholder="id" name="id" />
+        <input type="text" placeholder="first_name" name="first_name" />
+        <input type="text" placeholder="email" name="email" />
+        <input type="text" placeholder="password" name="password" />
+        <input type="submit" />
+      </form>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>first_name</th>
+          <th>email</th>
+          <th>password</th>
+          <th>operation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user=>{ %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.password %></td>
+          <td>
+            <form action="/user/<%= user.id %>?method=DELETE" method="POST">
+              <input type="submit" value="remove" />
+            </form>
+            <a href="/user/<%= user.id %>">update</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

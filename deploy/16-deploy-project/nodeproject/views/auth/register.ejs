@@ -1,0 +1,9 @@
+<%- include('../components/validation-error') -%>
+
+<form action="/auth/register" method="POST">
+  <input type="text" placeholder="name" name="name" />
+  <input type="text" placeholder="email" name="email" />
+  <input type="text" placeholder="password" name="password" />
+  <%- recaptcha %>
+  <input type="submit" value="register" id="" />
+</form>

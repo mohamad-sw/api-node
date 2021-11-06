@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/style.css">
+        <title></title>
+    </head>
+    <body>
+            <div>
+                    <form action="/user/<%= user.id %>?method=PUT" method="POST">
+                        <input type="text" placeholder="id" name="id" value="<%= user.id %>" >
+                        <input type="text" placeholder="first_name" name="first_name" value="<%= user.first_name %>">
+                        <input type="text" placeholder="email" name="email" value="<%= user.email %>">
+                        <input type="text" placeholder="password" name="password" value="<%= user.password %>">
+                        <input type="submit" value="update" >
+                    </form>
+                </div>
+    </body>
+</html>

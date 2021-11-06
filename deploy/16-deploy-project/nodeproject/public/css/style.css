@@ -1,0 +1,14 @@
+table{
+    border: 1px solid #444;
+
+}
+
+table td{
+    border: 1px solid #444;
+    padding: 3px 5px;
+}
+
+div{
+    padding: 30px 10px;
+}
+
